@@ -209,6 +209,3 @@
   * classical NLP theory
   * modern transformer practice
 
----
-
-Just tell me.
