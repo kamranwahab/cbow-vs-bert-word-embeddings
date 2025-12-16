@@ -1,104 +1,214 @@
-# cbow-vs-bert-word-embeddings
-A hands-on NLP project implementing CBOW from scratch and comparing it with contextual BERT embeddings to understand how modern language models represent meaning.
+# 🧠 How Do Machines Understand Words?
 
-📌 Project Highlights
+## CBOW vs BERT — Static vs Contextual Word Embeddings
 
-✔ Implemented CBOW (Continuous Bag of Words) from scratch using NumPy
-✔ Explicit forward & backward propagation (no deep-learning framework shortcuts)
-✔ Trained on Tiny Shakespeare corpus (as per academic specification)
-✔ Visualized learned embeddings using PCA
-✔ Extracted contextual embeddings from BERT
-✔ Demonstrated polysemy handling (static vs contextual meaning)
-✔ Clear experimental comparison: CBOW vs BERT
+---
 
-This project shows strong fundamentals in NLP, linear algebra, and model internals, not just library usage.
+<p align="center">
+  <img src="https://img.shields.io/badge/NLP-Word%20Embeddings-blue" />
+  <img src="https://img.shields.io/badge/Model-CBOW%20(from%20scratch)-orange" />
+  <img src="https://img.shields.io/badge/Model-BERT-green" />
+  <img src="https://img.shields.io/badge/Status-Completed-success" />
+</p>
 
-🎯 Objectives
+---
 
-Learn how static word embeddings are trained using CBOW
+## 📌 Project Overview
 
-Understand gradient-based training of embedding models
+* This project explores **how machines learn word meaning**
+* Implements **CBOW from scratch** (no deep-learning framework shortcuts)
+* Compares **static embeddings (CBOW)** with **contextual embeddings (BERT)**
+* Strictly follows an academic NLP assignment specification
+* Presented as a **clean, reproducible Jupyter notebook**
 
-Explore contextual embeddings using Transformer models
+---
 
-Experimentally compare classical vs modern NLP approaches
+## ⚡ Why This Project Matters (Recruiter Perspective)
 
-📂 Dataset
+* Most NLP projects **only use pretrained embeddings**
+* This project:
 
-Tiny Shakespeare Corpus
+  * builds embeddings **from first principles**
+  * implements **manual forward & backward propagation**
+  * validates ideas through **experiments and visualizations**
+* Demonstrates:
 
-Preprocessing:
+  * strong NLP fundamentals
+  * understanding of model internals
+  * ability to explain results clearly
 
-Lowercasing
+---
 
-Whitespace tokenization
+## 🧩 Core Question Addressed
 
-Punctuation removal
+* ❓ Does a word always have the same meaning?
+* 🧪 Experiment:
 
-Train/Test split: 80 / 20
+  * Compare **CBOW** vs **BERT**
+* 📌 Example:
 
-Why Tiny Shakespeare?
-It is small enough to train CBOW from scratch, yet rich enough to learn meaningful word co-occurrences.
+  * *“I deposited money in the bank”*
+  * *“They sat near the river bank”*
 
-🧠 Model Overview
-🔹 CBOW (From Scratch)
+**Expected behavior**
 
-Input: Average of context word one-hot vectors
+* CBOW → same embedding
+* BERT → different embeddings
 
-Context window: 2 (2 left + 2 right)
+---
 
-Hidden layer: W1 (V × D) → word embeddings
+## 🏗️ What Was Built
 
-Output layer: W2 (D × V)
+### 🔹 CBOW Model (From Scratch)
 
-Loss: Cross-entropy
+* Implemented using **NumPy only**
+* No PyTorch / TensorFlow for CBOW
+* Explicit implementation of:
 
-Optimization: Gradient Descent
+  * one-hot encoding
+  * context vector averaging
+  * matrix multiplication
+  * softmax activation
+  * cross-entropy loss
+  * gradient descent updates
+* Confirms **conceptual mastery**, not library dependency
 
-Implemented manually, step by step
+---
 
-🔹 BERT
+## 📚 Dataset & Preprocessing
 
-Model: bert-base-uncased
+* Dataset:
 
-Extracted embeddings from last hidden layer
+  * **Tiny Shakespeare Corpus**
+* Preprocessing steps:
 
-Used to demonstrate context-aware representations
+  * lowercasing
+  * whitespace tokenization
+  * punctuation removal
+* Training setup:
 
-📊 Experiments & Results
-🔍 CBOW Training
+  * ordered 80 / 20 train-test split
+  * context window = **2 left + 2 right**
 
-Loss decreases consistently across epochs
+---
 
-Confirms correct forward/backward implementation
+## 📉 CBOW Training Behavior
 
-Learned embeddings capture basic semantic similarity
+* Trained for multiple epochs
+* Observed:
 
-🎨 Embedding Visualization
+  * consistent decrease in training loss
+  * stable convergence behavior
+* Confirms:
 
-PCA shows clustering of semantically related words
+  * correct forward pass
+  * correct backpropagation
+  * correct parameter updates
 
-Some noise due to limited corpus size (expected)
+---
 
-🧪 Polysemy Experiment (“bank”)
-Model	Observation
-CBOW	Same vector regardless of context
-BERT	Different vectors for different meanings
+## 📊 What CBOW Learns
 
-✔ Clearly demonstrates static vs contextual embeddings
+* Captures **co-occurrence-based semantics**
+* Similar words move closer in embedding space
+* Limitations:
 
-⚔️ CBOW vs BERT — Quick Comparison
-Feature	CBOW	BERT
-Embedding Type	Static	Contextual
-Polysemy Handling	❌	✅
-Training Data	Small corpus	Massive pretraining
-Interpretability	High	Medium
-Real-world NLP	Limited	State-of-the-art
-🛠️ Tech Stack
-Python
-NumPy
-Matplotlib
-Scikit-learn
-Hugging Face Transformers
+  * one word → one fixed vector
+  * no context awareness
+  * cannot handle polysemy
 
-PyTorch (for BERT inference only)
+---
+
+## 🎨 Embedding Visualization
+
+* Dimensionality reduction using **PCA**
+* Observations:
+
+  * semantically related words form clusters
+  * rare or ambiguous words appear noisier
+* Visualization makes embeddings:
+
+  * interpretable
+  * explainable
+
+---
+
+## 🤖 BERT Contextual Embeddings
+
+* Model used:
+
+  * `bert-base-uncased`
+* Extracted:
+
+  * token-level embeddings from last hidden layer
+* Key behavior:
+
+  * same word → different vectors in different contexts
+* Demonstrates:
+
+  * context-aware representation
+  * strength of transformer architectures
+
+---
+
+## ⚔️ CBOW vs BERT — Experimental Comparison
+
+| Feature           | CBOW         | BERT                |
+| ----------------- | ------------ | ------------------- |
+| Embedding type    | Static       | Contextual          |
+| Context awareness | ❌            | ✅                   |
+| Polysemy handling | ❌            | ✅                   |
+| Training data     | Small corpus | Massive pretraining |
+| Real-world NLP    | Limited      | State-of-the-art    |
+
+---
+
+## 📊 Key Experimental Findings
+
+* CBOW:
+
+  * loss decreases over epochs
+  * embeddings capture basic similarity
+  * fails on multi-meaning words
+* BERT:
+
+  * embeddings vary with context
+  * successfully separates different word senses
+* Conclusion:
+
+  * static embeddings ≠ sufficient for real NLP tasks
+
+---
+
+## ▶️ Run the Project (Google Colab)
+
+* Open the notebook directly in Colab:
+
+```
+(https://colab.research.google.com/drive/1vfnWeomQRHlnkY_hM8kYnvetBZPIclUu)
+```
+
+
+## 🧠 Skills Demonstrated
+
+* NLP fundamentals
+* Neural network training from scratch
+* Vector similarity analysis
+* Embedding visualization
+* Transformer-based contextual embeddings
+* Experimental reasoning & interpretation
+
+---
+
+## 🏁 Final Takeaway
+
+* **CBOW** explains *how* word meaning emerges from co-occurrence
+* **BERT** explains *why* context is essential
+* This project connects:
+
+  * classical NLP theory
+  * modern transformer practice
+
+---
+
+Just tell me.
